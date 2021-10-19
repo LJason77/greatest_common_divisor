@@ -31,3 +31,22 @@ pub fn subtraction2(mut x: u64, mut y: u64) -> u64 {
         }
     }
 }
+
+/// 辗转相除法
+pub fn euclidean(mut x: u64, mut y: u64) -> u64 {
+    while x * y != 0 {
+        match x.cmp(&y) {
+            Ordering::Less => {
+                y %= x;
+            }
+            Ordering::Greater => {
+                x %= y;
+            }
+            Ordering::Equal => return y,
+        }
+    }
+    match x.cmp(&y) {
+        Ordering::Less | Ordering::Equal => y,
+        Ordering::Greater => x,
+    }
+}
