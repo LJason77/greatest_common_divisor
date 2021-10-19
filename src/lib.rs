@@ -50,3 +50,22 @@ pub fn euclidean(mut x: u128, mut y: u128) -> u128 {
         Ordering::Greater => x,
     }
 }
+
+/// Stein 算法
+pub fn stein(x: u128, y: u128) -> u128 {
+    match x.cmp(&y) {
+        Ordering::Less => stein(y, x),
+        Ordering::Greater => {
+            if x & 1 == 0 && y & 1 == 0 {
+                stein(x >> 1, y >> 1) << 1
+            } else if x & 1 == 0 && y & 1 != 0 {
+                stein(x >> 1, y)
+            } else if x & 1 != 0 && y & 1 == 0 {
+                stein(x, y >> 1)
+            } else {
+                stein(y, x - y)
+            }
+        }
+        Ordering::Equal => x,
+    }
+}
