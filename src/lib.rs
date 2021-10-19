@@ -17,10 +17,10 @@ pub fn subtraction(mut x: u128, mut y: u128) -> u128 {
 /// 更相减损术 除2
 pub fn subtraction2(mut x: u128, mut y: u128) -> u128 {
     let mut i = 1;
-    while x % 2 == 0 && y % 2 == 0 {
-        x /= 2;
-        y /= 2;
-        i *= 2;
+    while x & 1 == 0 && y & 1 == 0 {
+        x >>= 1;
+        y >>= 1;
+        i <<= 1;
     }
 
     loop {
